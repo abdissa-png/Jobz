@@ -1,0 +1,1 @@
+Store all front-end components related to jobseeker page Here.  

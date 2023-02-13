@@ -1,0 +1,1 @@
+Database entities are placed in this folder.

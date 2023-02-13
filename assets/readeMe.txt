@@ -1,0 +1,6 @@
+This folder is used to store all the front end components in separate folder for each entity using the system.
+With in each folder in assets organize your code like 
+--put all javascript code in js folder
+--put all video files in video folder
+--put all audio files in audio folder
+--put all img files in img folder

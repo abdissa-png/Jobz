@@ -1,0 +1,1 @@
+Store all front-end components related to University/college page Here.  
