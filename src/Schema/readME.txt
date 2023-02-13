@@ -1,1 +1,1 @@
-Database entities are placed in this folder.
+Database schemas are placed in this folder.
