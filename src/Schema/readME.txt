@@ -1,1 +1,0 @@
-Database schemas are placed in this folder.
