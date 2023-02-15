@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <style>
+      hr{
+        background-color: white;
+        width: 100px;
+        height: 1px;
+        opacity: 0.6;
+      }
+      .signups{
+            width:500px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: center;
+            
+
+          }
+          .signBs{
+            background-color: lightblue;
+            padding: 5px;
+            margin: 10px;
+            border:0px;
+            text-align: center;
+            text-decoration: none;
+            text-transform:none;
+            color: black;
+          }
+    </style>
+    <title>Job seeker Sign Up</title>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-dark">
+            <a class="navbar-brand" href="#"><img src="image/joyzlogo.png" width="150px"alt="logo"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+              <span class=" text-secondary navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item  p-xl-4 p-md-2 active">
+                  <a class="nav-link text-light" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item  p-xl-4 p-md-2">
+                  <a class="nav-link text-light" href="#">About</a>
+                </li>
+                <li class="nav-item  p-xl-4 p-md-2">
+                  <a class="nav-link text-light" href="#">Contact</a>
+                </li>
+                <li class="nav-item  p-xl-4 p-md-2">
+                    <a class="nav-link text-light" href="#">login</a>
+                  </li>
+                  <li class="nav-item  p-xl-4 p-md-2">
+                    <a class="nav-link text-light" href="#">sign in</a>
+                  </li>
+                  
+              </ul>
+            </div>
+          </nav>
+
+
+
+
+    </header>
+</head>
+<body>
+    <div class="container mt-3 ">
+        <h2>Job seeker Sign Up</h2>
+        <form action="POST">
+            
+          <div class="mb-3 mt-3">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="Sex">Sex:</label>
+            <input type="text" class="form-control" id="Sex" placeholder="Male/Female" name="Sex" required>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="Skills">Skills:</label>
+            <textarea class="form-control" rows="5" id="Skills" name="Skills" required></textarea>
+          </div>
+          <div class="mb-3 mt-3">
+            <label for="qualifications">Qualifications:</label>
+            <textarea class="form-control" rows="5" id="qualifications" name="qualifications" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
+          </div>
+          <div class="mb-3">
+            <label for="Cpwd">Confirm Password:</label>
+            <input type="password" class="form-control" id="Cpwd" placeholder="confirm password" name="Cpswd" required>
+          </div>
+          <div id="errMsg"></div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+      <br>
+      <div class="signups">
+        <a class="signBs" href="Login.html">Login</a>
+        <a class="signBs" href="signUpEmployer.html">sign up as Employer</a>
+      </div>
+      <footer class= " row d-flex justify-content-center align-items-center text-center  " style="background-color: black;" >
+        <div class="row  container pt-5 pb-5  "  >
+            <div class="col-md-3 col-sm-6" >
+                <img   class="p-0 m-2" src="image/joyzlogo.png" width="120px" height="150px" >
+                
+            </div>
+            <div class="text-white col-md-3 col-sm-6 ">
+                <h3 class="text-uppercase  mb-4 font-weight-bold text-light">Help</h3>
+                <hr>
+                <a  class="text-decoration-none text-capitalize text-light mb-4 p-3 text-decoration-none text-capitalize text-light mb-4 text-white"href="about" >about</a><br>
+                <a  class="p-3 text-decoration-none text-capitalize text-white mb-4" href="">About Us</a><br>
+                <a  class="p-3 text-decoration-none text-capitalize text-light mb-4"href="">Contact</a><br>
+                <a  class="p-3 text-decoration-none text-capitalize text-light mb-4"href="" >FAQ</a><br>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h3 class="text-uppercase mb-4 font-weight-bold text-warning ">my Accounts</h3>
+                <hr>
+                <a class="p-3 text-decoration-none  text-capitalize text-light mb-4 " href="#">log in</a><br>
+                <a class="p-3 text-decoration-none text-capitalize text-light mb-4" href="#">sign up </a><br>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <h3 class="text-uppercase mb-4 font-weight-bold text-light">follow us</h3>
+                <hr>
+                <a class=" text-decoration-none text-capitalize text-light m-md-2" href="www.facebook.com" ><img src="image/facebool.jpeg"  width="50px" alt="">
+                <a  class="text-decoration-none text-capitalize text-light m-md-2 "href="www.instagram.com">
+                    <img src="image/instagram.jpeg" alt="instagram  logo photo" width="50px">
+                <a class="text-decoration-none text-capitalize text-light m-md-2" href=""> <img src="image/telegram.jpeg" alt="" width="50px">
+            </div>
+            
+        </div>
+    </footer> 
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
