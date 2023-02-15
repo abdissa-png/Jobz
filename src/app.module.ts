@@ -12,6 +12,9 @@ import { LoginSchema } from './Model/login.model';
 import { UnivDataOfJobSeekersSchema } from './Model/univDataOfJobSeekers.model';
 import { JobsAppliedToSchema } from './Model/jobsAppliedTo.model';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AtGuard } from './common/guards/at.guard';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [MongooseModule.forRoot(
@@ -26,8 +29,12 @@ import { AuthModule } from './auth/auth.module';
 {name:"JobsAppliedTo",schema:JobsAppliedToSchema}],
 ),
   AuthModule,
+  ConfigModule.forRoot({isGlobal:true}),
 ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,{
+    provide:APP_GUARD,
+    useClass: AtGuard,
+  }],
 })
 export class AppModule {}

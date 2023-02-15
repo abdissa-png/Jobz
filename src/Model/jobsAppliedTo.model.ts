@@ -8,6 +8,6 @@ export const JobsAppliedToSchema=new mongoose.Schema({
 export interface JobsAppliedTo{
     id:string;
     jobId:string;
-    jobSeekerID:string;
+    jobSeekerId:string;
     status:string;
 }
