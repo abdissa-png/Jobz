@@ -11,6 +11,8 @@ import { JobSchema } from './Model/job.model';
 import { LoginSchema } from './Model/login.model';
 import { UnivDataOfJobSeekersSchema } from './Model/univDataOfJobSeekers.model';
 import { JobsAppliedToSchema } from './Model/jobsAppliedTo.model';
+import { JobSeekerModule } from './job-seeker/job-seeker.module';
+import { EmployerModule } from './employer/employer.module';
 
 @Module({
   imports: [MongooseModule.forRoot(
@@ -24,6 +26,8 @@ import { JobsAppliedToSchema } from './Model/jobsAppliedTo.model';
 {name:"UnivDataOfJobSeekers",schema:UnivDataOfJobSeekersSchema},
 {name:"JobsAppliedTo",schema:JobsAppliedToSchema}],
 ),
+  JobSeekerModule,
+  EmployerModule,
 ],
   controllers: [AppController],
   providers: [AppService],

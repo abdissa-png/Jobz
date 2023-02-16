@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import * as mongoose from "mongoose";
 export const JobSchema=new mongoose.Schema({
-    companyId:{type:String,required:true},
+    // companyId:{type:String,required:true},
     title:{type:String,required:true},
     jobType:{type:String,required:true},
     location:{type:String,required:true},
@@ -14,7 +14,7 @@ export const JobSchema=new mongoose.Schema({
     deadline:{type:Date,required:true},
     jobCategory:{type:[String],required:true},
 })
-export interface Job{
+export interface Job extends mongoose.Document{
     id:string;
     companyId:string;
     title:string;
