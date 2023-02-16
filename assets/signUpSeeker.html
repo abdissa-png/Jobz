@@ -1,157 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="image/jobzlogo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
     <style>
-      hr{
-        background-color: white;
-        width: 100px;
-        height: 1px;
-        opacity: 0.6;
+      .navbar-img {
+        width: 80px;
       }
-      .signups{
-            width:500px;
-            margin: auto;
-            display: flex;
-            flex-direction: column;
-            flex-wrap: center;
-            
 
-          }
-          .signBs{
-            background-color: lightblue;
-            padding: 5px;
-            margin: 10px;
-            border:0px;
-            text-align: center;
-            text-decoration: none;
-            text-transform:none;
-            color: black;
-          }
+      .course-list__course-logo,
+      .opp-img {
+        width: 10rem;
+      }
+
+      .footer__logo {
+        width: 75%;
+      }
     </style>
-    <title>Job seeker Sign Up</title>
+    <title>Job Seeker Sign Up</title>
+  </head>
+  <body>
     <header>
-      <nav class="navbar navbar-expand-sm navbar-light bg-dark">
-          <a class="navbar-brand" href="#"><img src="image/joyzlogo.png" width="150px"alt="logo"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-            <span class="" class=" text-secondary navbar-toggler-icon"></span >
-          </button>
-         
-          <div class="collapse navbar-collapse" id="navbarNav">
-            
-            <ul class="navbar-nav ml-auto">
-             
-              <li class="nav-item  p-xl-4 p-md-2 active">
-                <a class="nav-link text-light" href="#">Home <span class="text-primary" class="sr-only"></span class="text-primary"></a>
-              </li>
-              <li class="nav-item  p-xl-4 p-md-2">
-                <a class="nav-link text-light" href="#">About</a>
-              </li>
-              <li class="nav-item  p-xl-4 p-md-2">
-                <a class="nav-link text-light" href="#">Contact</a>
-              </li>
-              <li class="nav-item  p-xl-4 p-md-2">
-                  <a class="nav-link text-light" href="#">login</a>
-                </li>
-                <li class="nav-item  p-xl-4 p-md-2">
-                  <a class="nav-link text-light" href="#">sign in</a>
-                </li>
-                
-            </ul>
-            
-          </div>
-        </nav>
-  </header>
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <div class="container">
+          <a href="#" class="navbar-brand"
+            ><img class="navbar-img" src="image/jobzlogo.png" alt="JobZ logo" />
+          </a>
 
-</head>
-<body>
-    <div class="container mt-3 ">
-        <h2>Job seeker Sign Up</h2>
-        <form action="POST">
-            
-          <div class="mb-3 mt-3">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navlinks"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse text-center" id="navlinks">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a href="index.html" class="nav-link">Home</a>
+              </li>
+              <li class="nav-item">
+                <a href="Contact-us.html" class="nav-link">Contact Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="About-us.html" class="nav-link">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="Login.html" class="nav-link">Log in</a>
+              </li>
+              <li class="nav-item">
+                <a href="Sign-up.html" class="nav-link">Sign Up</a>
+              </li>
+            </ul>
           </div>
-          <div class="mb-3 mt-3">
-            <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required>
-          </div>
-          <div id="sex">
-            <label for="sex">Sex:</label>
-            
+        </div>
+      </nav>
+    </header>
+
+    <div class="container mt-3">
+      <h2>Job Seeker Sign Up</h2>
+      <div>
+        <div class="mb-3 mt-3">
+          <label for="name">Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            placeholder="Enter name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="mb-3 mt-3">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            placeholder="Enter email"
+            name="email"
+            required
+          />
+        </div>
+        <div id="sex">
+          <label for="sex">Sex:</label>
+
           <div class="form-check">
-            <input type="radio" class="form-check-input" id="male" name="Sex" value="male" checked>male
+            <input
+              type="radio"
+              class="form-check-input"
+              id="male"
+              name="Sex"
+              value="male"
+              checked
+            />male
             <label class="form-check-label" for="male"></label>
           </div>
           <div class="form-check">
-            <input type="radio" class="form-check-input" id="female" name="Sex" value="female">female
+            <input
+              type="radio"
+              class="form-check-input"
+              id="female"
+              name="Sex"
+              value="female"
+            />female
             <label class="form-check-label" for="radio2"></label>
           </div>
-          
         </div>
-          <div class="mb-3 mt-3">
-            <label for="Skills">Skills:</label>
-            <textarea class="form-control" rows="5" id="Skills" name="Skills" required></textarea>
-          </div>
-          <div class="mb-3 mt-3">
-            <label for="qualifications">Qualifications:</label>
-            <textarea class="form-control" rows="5" id="qualifications" name="qualifications" required></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd" required>
-          </div>
-          <div class="mb-3">
-            <label for="Cpwd">Confirm Password:</label>
-            <input type="password" class="form-control" id="Cpwd" placeholder="confirm password" name="Cpswd" required>
-          </div>
-          <div id="errMsg"></div>
-          <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-      </div>
-      <br>
-      <div class="signups">
-        <a class="signBs" href="Login.html">Login</a>
-        <a class="signBs" href="signUpEmployer.html">sign up as Employer</a>
-      </div>
-<footer class= " row d-flex justify-content-center align-items-center text-center" style="background-color: black;" >
-        <div class="row  container pt-5 pb-5  "  >
-            <div class="col-md-3 col-sm-6" >
-                <img   class="p-0 m-2" src="image/joyzlogo.png" width="120px" height="150px" >
-                
-            </div>
-            <div class="text-white col-md-3 col-sm-6 ">
-                <h3 class="text-uppercase  mb-4 font-weight-bold text-light">Help</h3>
-                <hr>
-                <a  class="text-decoration-none text-capitalize text-light mb-4 p-3 text-decoration-none text-capitalize text-light mb-4 text-white"href="about" >about</a><br>
-                <a  class="p-3 text-decoration-none text-capitalize text-white mb-4" href="">About Us</a><br>
-                <a  class="p-3 text-decoration-none text-capitalize text-light mb-4"href="">Contact</a><br>
-                <a  class="p-3 text-decoration-none text-capitalize text-light mb-4"href="" >FAQ</a><br>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <h3 class="text-uppercase mb-4 font-weight-bold text-warning ">my Accounts</h3>
-                <hr>
-                <a class="p-3 text-decoration-none  text-capitalize text-light mb-4 " href="#">log in</a><br>
-                <a class="p-3 text-decoration-none text-capitalize text-light mb-4" href="#">sign up </a><br>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <h3 class="text-uppercase mb-4 font-weight-bold text-light">follow us</h3>
-                <hr>
-                <a class=" text-decoration-none text-capitalize text-light m-md-2" href="www.facebook.com" ><img src="image/facebool.jpeg"  width="50px" alt="">
-                <a  class="text-decoration-none text-capitalize text-light m-md-2 "href="www.instagram.com">
-                    <img src="image/instagram.jpeg" alt="instagram  logo photo" width="50px">
-                <a class="text-decoration-none text-capitalize text-light m-md-2" href=""> <img src="image/telegram.jpeg" alt="" width="50px">
-            </div>
-            
+        <div class="mb-3 mt-3">
+          <label for="Skills">Skills:</label>
+          <textarea
+            class="form-control"
+            rows="5"
+            id="Skills"
+            name="Skills"
+            required
+          ></textarea>
         </div>
+        <div class="mb-3 mt-3">
+          <label for="qualifications">Qualifications:</label>
+          <textarea
+            class="form-control"
+            rows="5"
+            id="qualifications"
+            name="qualifications"
+            required
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="pwd">Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="pwd"
+            placeholder="Enter password"
+            name="pswd"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="Cpwd">Confirm Password:</label>
+          <input
+            type="password"
+            class="form-control"
+            id="Cpwd"
+            placeholder="confirm password"
+            name="Cpswd"
+            required
+          />
+        </div>
+        <div id="errMsg"></div>
+        <button id="submitSeekerSignUp" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+    <br />
+    <div class="text-center">
+      <button id="login" class="btn btn-secondary m-2">Log in</button>
+      <button id="employerSignUp" class="btn btn-secondary m-2">
+        Sign up as Employer
+      </button>
+    </div>
+
+    <footer class="text-center text-lg-start bg-dark text-light">
+      <div class="container">
+        <section class="">
+          <div class="container text-center text-md-start mt-5">
+            <div class="row mt-3">
+              <div class="col-md-3 col-lg-4 col-xl-3 mx-auto my-4 text-center">
+                <img
+                  class="footer__logo"
+                  src="image/jobzlogo.png"
+                  alt="JobZ logo"
+                />
+                <q style="font-style: italic">
+                  For everyone, we offer a recruitment solution. professional,
+                  pragmatic, and forward-thinking.
+                </q>
+              </div>
+
+              <div class="col-md-2 col-lg-2 col-xl-2 mx-auto my-4">
+                <h6 class="text-uppercase fw-bold mb-4">Help</h6>
+                <p>
+                  <a href="about-us.html" class="text-reset">About Us</a>
+                </p>
+                <p>
+                  <a href="contact-us.html" class="text-reset">Contact Us</a>
+                </p>
+                <p>
+                  <a href="index.html#faqs" class="text-reset">FAQs</a>
+                </p>
+              </div>
+              <div class="col-md-3 col-lg-2 col-xl-2 mx-auto my-4">
+                <h6 class="text-uppercase fw-bold mb-4">My Account</h6>
+                <p>
+                  <a href="login.html" class="text-reset">Log in</a>
+                </p>
+                <p>
+                  <a href="Sign-up.html" class="text-reset">Sign up</a>
+                </p>
+              </div>
+              <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                <h6 class="text-uppercase fw-bold mb-4">Follow us on</h6>
+                <a href="" class="me-4 text-reset">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                  <i class="fab fa-twitter"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                  <i class="fab fa-google"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                  <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="" class="me-4 text-reset">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <div
+          class="text-center p-4"
+          style="background-color: rgba(0, 0, 0, 0.05)"
+        >
+          © 2023 Copyright:
+          <a class="text-reset fw-bold" href="index.html">JobZ</a>
+        </div>
+      </div>
     </footer>
-<script src="image/https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="image/https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="image/https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-</body>
+
+    <script src="js/signUpSeeker.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+  </body>
 </html>
