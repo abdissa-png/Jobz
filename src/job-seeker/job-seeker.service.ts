@@ -23,21 +23,6 @@ export class JobSeekerService {
     console.log(query.keyWord)
     let Jobs = await this.Job.find({ title: query.title });
     return Jobs
-    // Jobs.map((job) => ({
-    //   id: job.id,
-    //   companyId: job.companyId,
-    //   title: job.title,
-    //   jobType: job.jobType,
-    //   location: job.location,
-    //   company: job.company,
-    //   salary: job.salary,
-    //   benefits: job.benefits,
-    //   numOfSlots: job.numOfSlots,
-    //   description: job.description,
-    //   dayPosted: job.dayPosted,
-    //   deadline: job.deadline,
-    //   jobCategory: job.jobCategory,
-    // }));
   }
 
   async createProfile(profile) {
