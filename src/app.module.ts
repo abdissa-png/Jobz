@@ -16,6 +16,8 @@ import { EmployerModule } from './employer/employer.module';
 import { UniversityModule } from './university/university.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AtGuard } from './common/guards/at.guard';
+import { AuthModule } from './auth/auth.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -34,6 +36,9 @@ import { AtGuard } from './common/guards/at.guard';
     ]),
     JobSeekerModule,
     EmployerModule,
+    UniversityModule,
+    AuthModule,
+    ConfigModule.forRoot({isGlobal:true}),
   ],
   controllers: [AppController],
   providers: [

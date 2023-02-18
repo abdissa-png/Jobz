@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-empty-function */
 import { Body, Controller, HttpCode, HttpException, HttpStatus, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { EmployerAuthDto } from './dto/employerAuth.dto';
@@ -20,7 +20,7 @@ export class AuthController {
     @Post("signup/employer")
     @HttpCode(HttpStatus.CREATED)
     async signUpEmployer(@Body() dto:EmployerAuthDto){
-       const result=await await this.authService.signUpEmployer(dto);
+       const result=await this.authService.signUpEmployer(dto);
        return  result as object;
     }
 
