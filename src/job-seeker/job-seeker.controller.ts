@@ -1,11 +1,12 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { Body, Delete, Patch } from '@nestjs/common/decorators';
 import { JobSeekerService } from './job-seeker.service';
+import { Public } from 'src/common/decorators/public.decorator';
 
 @Controller('job-seeker')
 export class JobSeekerController {
   constructor(private JobSeekerService: JobSeekerService) {}
-
+  @Public()
   @Post('getUser')
   async getId(@Body() query: { email: string }) {
     return this.JobSeekerService.findJS(query.email)

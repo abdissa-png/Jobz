@@ -27,7 +27,39 @@
         width: 75%;
       }
     </style>
+    <!-- <script>
+    let email = localStorage.getItem("email");
+    console.log(email)
+     function LoadTutorials() {
+        fetch("http://localhost:4000/job-seeker/getUser", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: email
+              }),
+            })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data)
+            // const div = document.createElement("div");
+            // const a = JSON.stringify(data[2]);
+            // const abdu = JSON.parse(a);
+            
+            // btn.innerHTML = `<h1>${abdu.title}</h1>`
+            
+            // container.appendChild(div);
+          });
+      }
 
+      LoadTutorials();
+
+
+
+    </script> -->
     <title>Profile - JobZ</title>
   </head>
 
