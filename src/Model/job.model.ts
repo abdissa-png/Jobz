@@ -3,6 +3,7 @@ import * as mongoose from "mongoose";
 export const JobSchema=new mongoose.Schema({
     // companyId:{type:String,required:true},
     title:{type:String,required:true},
+    companyId:{type:String,required:true},
     jobType:{type:String,required:true},
     location:{type:String,required:true},
     company:{type:String,required:true},

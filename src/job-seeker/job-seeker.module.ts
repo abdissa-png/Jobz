@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Module } from '@nestjs/common';
 import { JobSeekerService } from './job-seeker.service';
 import { JobSeekerController } from './job-seeker.controller';
@@ -8,6 +9,7 @@ import { JobSchema } from 'src/Model/job.model';
 import { ExperienceSchema } from 'src/Model/experience.model';
 import { EducationSchema } from 'src/Model/education.model';
 import { complaint } from 'src/Model/complaint.model';
+import { LoginSchema } from 'src/Model/login.model';
 
 @Module({
   imports: [
@@ -35,6 +37,9 @@ import { complaint } from 'src/Model/complaint.model';
       {
         name: 'complaint',
         schema: complaint
+      },{
+        name:"Login",
+        schema:LoginSchema
       }
     ]),
   ],

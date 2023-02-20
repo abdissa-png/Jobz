@@ -1,12 +1,19 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-const */
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 import { Complaint } from 'src/Model/complaint.model';
 import { Education } from 'src/Model/education.model';
 import { Experience } from 'src/Model/experience.model';
 import { Job } from 'src/Model/job.model';
 import { JobsAppliedTo } from 'src/Model/jobsAppliedTo.model';
 import { JobSeeker } from 'src/Model/jobSeeker.model';
+import { Login } from 'src/Model/login.model';
+import { JobSeekerProfile } from './dto/jobSeekerProfile.dto';
+import { EducationalInfoProfileDto } from './dto/educationalInfoProfile.dto';
+import { JobExperienceDto } from './dto/jobExperience.dto';
 
 @Injectable()
 export class JobSeekerService {
@@ -17,14 +24,71 @@ export class JobSeekerService {
     @InjectModel('experience') private experience: Model<Experience>,
     @InjectModel('education') private education: Model<Education>,
     @InjectModel('complaint') private complaint: Model<Complaint>,
+    @InjectModel("Login") private Login:Model<Login>
   ) {}
 
   async search(query) {
-    console.log(query.keyWord)
-    let Jobs = await this.Job.find({ title: query.title });
+    //console.log(query.keyWord)
+    let Jobs = await this.Job.find({ title: query});
+    //console.log(Jobs);
     return Jobs
   }
-
+  async getId(id:string){
+    const user=await this.Login.findOne({_id:id});
+    const jobSeeker=await this.JobSeeker.findOne({email:user.email});
+    return jobSeeker.id;
+  }
+  async editJobSeekerProfile(id:string,profile:JobSeekerProfile){
+    const user=await this.Login.findOne({_id:id});
+    const jobSeeker=await this.JobSeeker.updateOne({email:user.email},{
+      name:profile.name,
+      sex:profile.sex,
+      skills:profile.skills,
+      qualifications:profile.qualifications,
+    })
+    return jobSeeker;
+  }
+  async showEducationalInfo(id:string){
+      const user=await this.Login.findOne({_id:id});
+      const jobSeeker=await this.JobSeeker.findOne({email:user.email});
+      const education=await this.education.find({jobSeekerId:jobSeeker.id});
+      return education;
+  }
+  async editEducationalInfo(profile){
+      console.log(profile);
+      const educationalInfo=this.education.findByIdAndUpdate(profile.educationalInfoId,{
+        institution:profile.profile.institution,
+        degreeLevel:profile.profile.degreeLevel,
+        fieldOfStudy:profile.profile.fieldOfStudy,
+        gpa:profile.profile.gpa,
+        admissionYear:profile.profile.admissionYear,
+        graduationYear:profile.profile.graduationYear,
+      },{new:true});
+      return educationalInfo;
+  }
+  async showJobExperience(id:string){
+    const user=await this.Login.findOne({_id:id});
+    const jobSeeker=await this.JobSeeker.findOne({email:user.email});
+    const jobExperience=await this.experience.find({jobSeekerId:jobSeeker.id});
+    return jobExperience;
+  }
+  async editJobExperience(profile){
+    const experience=this.experience.findByIdAndUpdate(profile.jobExperienceId,{
+      jobTitle:profile.profile.jobTitle,
+      companyName:profile.profile.companyName,
+      startDate:profile.profile.startDate,
+      endDate:profile.profile.endDate,
+      reference:profile.profile.reference
+    },{new:true});
+    return experience;
+  }
+  async getJobsAppliedTo(id){
+    const user=await this.Login.findOne({_id:id});
+    const jobSeeker=await this.JobSeeker.findOne({email:user.email});
+    const jobsAppliedTo=this.JobsAppliedTo.find({jobSeekerId:jobSeeker.id});
+    return jobsAppliedTo;
+  }
+  /*
   async createProfile(profile) {
     const newUser = new this.JobSeeker({
       name: profile.name,
@@ -105,27 +169,59 @@ export class JobSeekerService {
       userExp.save();
     }
   }
-
-  async apply(jobform) {
-    let jid = await this.findJS(jobform.email) 
-    jid = jid.id
+  */
+  async apply(id,jobform) {
+    const user=await this.Login.findOne({_id:id});
+    const jobSeeker=await this.JobSeeker.findOne({email:user.email});
     // find job id will be called here
+    console.log(jobform);
     const newApplication = new this.JobsAppliedTo({
-      jobId: jobform.jobID,
-      jobSeekerId: jid,
+      jobId: jobform.jobId,
+      jobSeekerId: jobSeeker.id,
       title: jobform.title,
       status: jobform.status,
-      company: jobform.company
+      company: jobform.company,
+      companyId:jobform.companyId
     });
     console.log(newApplication)
     const result = await newApplication.save();
   }
+  async createEducationalInfo(id:string,profile:EducationalInfoProfileDto){
+    const user=await this.Login.findOne({_id:id});
+    const jobSeeker=await this.JobSeeker.findOne({email:user.email});
+    const education=await this.education.create({
+      jobSeekerId:jobSeeker.id,
+      institution:profile.institution,
+      fieldOfStudy:profile.fieldOfStudy,
+      gpa:profile.gpa,
+      admissionYear:profile.admissionYear,
+      graduationYear:profile.graduationYear,
+      degreeLevel:profile.degreeLevel,
+    })
+    education.save();
+    return education;
+  }
+  async createJobExperience(id:string,profile:JobExperienceDto){
+    const user=await this.Login.findOne({_id:id});
+    const jobSeeker=await this.JobSeeker.findOne({email:user.email});
+    const experience=await this.experience.create({
+      jobSeekerId:jobSeeker.id,
+      jobTitle:profile.jobTitle,
+      companyName:profile.companyName,
+      startDate:profile.startDate,
+      endDate:profile.endDate,
+      reference:profile.reference
+    })
+    experience.save();
+    return experience;
+  }
 
-  async complain(complaintform) {
-    const jid = await this.findJS(complaintform.email)
+  async complain(id,complaintform) {
+    const user=await this.Login.findOne({_id:id});
+    const jobSeeker=await this.JobSeeker.findOne({email:user.email});
     const newComplaint = new this.complaint({
-      jobSeekerId: jid.id,
-      email: complaintform.email,   
+      jobSeekerId: jobSeeker.id,
+      email: jobSeeker.email,   
       complaint: complaintform.complaint
     })
     const result = await newComplaint.save();
@@ -145,7 +241,7 @@ export class JobSeekerService {
       throw new NotFoundException('Could not find user');
     }
   }
-
+  /*
   async findJS(email: string) {
     let res;
     try {
@@ -187,4 +283,5 @@ export class JobSeekerService {
     let exp = await this.experience.findOne({ jobSeekerId: resID });
     return exp;
   }
+  */
 }
