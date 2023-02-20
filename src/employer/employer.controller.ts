@@ -1,10 +1,12 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Patch, Post } from '@nestjs/common';
+import { Public } from 'src/common/decorators/public.decorator';
 import { EmployerService } from './employer.service';
 
 @Controller('employer')
 export class EmployerController {
   constructor(private employerService: EmployerService) {}
 
+  @Public()
   @Post('postJobs') // create a job in the database
   async postJobs(
     @Body()
@@ -22,21 +24,24 @@ export class EmployerController {
       jobCategory: string;
     },
   ) {
-      return this.employerService.addJob(job)
+    return this.employerService.addJob(job);
   }
 
+  @Public()
   @Post('viewDetails') // returns list of jobseekers that applied to one job
-  async listApplicants(@Body() query: {
-      title: string,
-      company: string
-  }) {
-      return this.employerService.listApplicants(query)
+  async listApplicants(@Body() query: { title: string; company: string }) {
+    return this.employerService.listApplicants(query);
   }
-    
-    @Post("getAllJobs")
-    async getAllPosts(@Body() company: {
-        company: string
-    }) {
-        return this.employerService.getAllJobs(company)
-    }
+
+  @Public()
+  @Post('getAllJobs')
+  async getAllPosts(@Body() company: { company: string }) {
+    return this.employerService.getAllJobs(company);
+  }
+
+  @Public()
+  @Patch('updateStatus')
+    async updateStatus (@Body() query: {jobSeekerEmail: string, jobId: string, jobStatus: string}){
+      return this.employerService.updateStatus(query)
+  }
 }

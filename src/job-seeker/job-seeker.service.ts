@@ -34,7 +34,6 @@ export class JobSeekerService {
       qualifications: profile.qualifications,
     });
     const result = await newUser.save();
-    console.log(result._id);
     const newUSerexp = new this.experience({
       jobSeekerId: result._id,
       jobTitle: profile.jobTitle,
@@ -144,6 +143,27 @@ export class JobSeekerService {
     if (result.deletedCount === 0) {
       throw new NotFoundException('Could not find user');
     }
+  }
+
+
+  async getEducation(query: { email: string; }) {
+    let queryResult = await this.JobSeeker.find({
+      email: query.email,
+    })
+    let person = await this.education.find({
+      jobSeekerId: queryResult[0].id
+    })
+    return person[0]
+  }
+
+  async getExperience(query: { email: string; }) {
+    let queryResult = await this.JobSeeker.find({
+      email: query.email,
+    })
+    let person = await this.experience.find({
+      jobSeekerId: queryResult[0].id
+    })
+    return person[0]
   }
 
   async findJS(email: string) {
