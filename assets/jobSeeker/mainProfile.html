@@ -27,39 +27,7 @@
         width: 75%;
       }
     </style>
-    <!-- <script>
-    let email = localStorage.getItem("email");
-    console.log(email)
-     function LoadTutorials() {
-        fetch("http://localhost:4000/job-seeker/getUser", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                email: email
-              }),
-            })
-          .then((res) => {
-            return res.json();
-          })
-          .then((data) => {
-            console.log(data)
-            // const div = document.createElement("div");
-            // const a = JSON.stringify(data[2]);
-            // const abdu = JSON.parse(a);
-            
-            // btn.innerHTML = `<h1>${abdu.title}</h1>`
-            
-            // container.appendChild(div);
-          });
-      }
-
-      LoadTutorials();
-
-
-
-    </script> -->
+   
     <title>Profile - JobZ</title>
   </head>
 
@@ -117,11 +85,15 @@
                 class="form-control rounded"
                 placeholder="Search"
                 aria-label="Search"
+                id="search"
                 aria-describedby="search-addon"
               />
-              <button type="button" class="btn btn-outline-primary">
+              <button type="button" id="searchbtn" value= "ON" class="btn btn-outline-primary">
                 search
               </button>
+            </div>
+            <div id="searchresults">
+              <div id="searchresults2"></div>
             </div>
             <div class="row">
               <div class="col-md-4"></div>
@@ -149,7 +121,7 @@
                     aria-expanded="true"
                     aria-controls="collapseOne"
                   >
-                    <span class="fw-bold">Husen Yusuf</span>
+                    <span class="fw-bold" id="username">Husen Yusuf</span>
                   </button>
                 </h2>
                 <div
@@ -159,7 +131,7 @@
                   data-bs-parent="#accordionExample"
                 >
                   <div class="accordion-body text-center my-0">
-                    <h2>Husen Yusuf</h2>
+                    <h2 id="username2">Husen Yusuf</h2>
                     <button class="btn btn-warning">Edit Profile</button>
                   </div>
                 </div>
@@ -438,6 +410,259 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      let jobseekeriddd = new Object();
+      const searchresults  = document.getElementById('searchresults');
+      const searchresults2  = document.getElementById('searchresults2');
+      const searchfield = document.getElementById('search');
+      const searchbtn = document.getElementById('searchbtn');
+      const nameofuser = document.getElementById('username');
+      var array = [];
+      console.log(array);
+      const nameofuser2 = document.getElementById('username2');
+
+      let email = localStorage.getItem("email");
+      console.log(email)
+      async function LoadTutorials() {
+         data = await fetch("http://localhost:4000/job-seeker/getUser", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: email
+                }),
+              })
+              a = await data.json()
+              getjobsapplied()
+              console.log(a)
+              console.log(a.name)
+              console.log(a._id)
+              nameofuser.innerText = a.name
+              nameofuser2.innerText = a.name
+              console.log(a._id)
+              data3 = await fetch("http://localhost:4000/job-seeker/getjobsappliedto", {
+          method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  jobSeekerId: a._id
+                }),
+
+                
+
+        })
+        
+        console.log(data3);
+
+      }
+      
+       LoadTutorials() 
+       console.log('identify');
+       abebe =JSON.stringify(jobseekeriddd)
+       abbebe2 = JSON.parse(abebe);
+      console.log(jobseekeriddd._id)
+
+       function showDetails(ele){
+          let component = document.getElementById(ele)
+          if (component.style.display == 'none'){
+            component.style.display = "block"
+          }
+          else {
+            component.style.display = "none"
+          }
+        }
+
+        
+       async function searchalgorithm(){
+        searchresults2.innerHTML = '';
+        if(searchbtn.value = "ON"){
+        const searchfieldval = searchfield.value;
+        console.log(searchfieldval)
+
+        try{
+          if(searchfieldval === "") {
+            // searchresults.innerText = "please type job title to search";
+            throw "please Fill the required information";
+          }
+          else{
+            result = await  fetch("http://localhost:4000/job-seeker/search", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                title: searchfieldval
+              }),
+            }
+
+            );
+            result = await result.json();
+            console.log(result[0].company);
+           result.forEach(element => {
+            // searchresults2.innerHTML += `
+            // <div class = "col-md-7">${element.title}</br><small>${element.company}</small></div>
+            // <div class = "col-md-5"><button onclick = 'showDetails("details${element.title}".split(" ").join(""))'  class = "btn btn-warning m-auto">See Details</button></br>
+            //   <div id = "details${element.title}'.split(' ').join('')" class = "bg-light" style = "display: none;">
+            //     by ${element.company}</br>
+            //     job type: ${element.jobType}</br>
+            //     location: ${element.location}</br>
+            //     Available slots: ${element.numOfSlots}</br>
+            //     deadline: ${element.deadline}</br>
+            //     Salary: ${element.salary}</br>
+            //     <button id = "btn5" class= "btn btn-warning">Apply now!</button>
+            //     </div>
+            //   </div>`
+              const div = document.createElement("div");
+              const h2 = document.createElement("h4");
+              const h5 = document.createElement("h5");
+              const button = document.createElement("button");
+              h2.innerText = element.title
+              h5.innerText = element.company
+              button.innerText = "Sea Details";
+              button.style.height = "2.5em"
+              div.appendChild(h2);
+              div.appendChild(h5);
+              h5.style.fontSize = '5px';
+              searchresults2.appendChild(div);
+              searchresults.appendChild(button);
+              button.style.borderRadius = '8px';
+              searchresults.style.display= "flex";
+              searchresults2.style.marginRight = "auto";
+              button.style.marginRight = "1.5em";
+              button.addEventListener('click', () => {
+              
+        const div2 = document.createElement("div");
+        const h40 = document.createElement("h4");
+        const h41 = document.createElement("h5");
+        const h42 = document.createElement("h5");
+        const h43 = document.createElement("h5");
+        const h44 = document.createElement("h5");
+        const h45 = document.createElement("h5");
+        const h46 = document.createElement("h5");
+        const btn5 = document.createElement('button');
+        const successmessage = document.createElement('h5');
+        console.log(array[0]);
+        console.log(element)
+        console.log(element.benefits)
+        array.push(element.company)
+        console.log(element._id);
+       
+        // h40.innerText = '';
+        // h41.innerText = '';
+        // h42.innerText ='';
+        // h43.innerText='';
+        // h44.innerText ='';
+        // h45.innerText ='';
+        // h46.innerText= '';
+        // btn5.innerText = '';
+        // div2.innerHTML = '';
+        // successmessage.innerText ='';
+
+        
+
+        
+        
+        
+        h40.innerText = element.title
+        h41.innerText= `by ${element.company}`
+        h42.innerText = `job type: ${element.jobType}`
+        h43.innerText = `location: ${element.location}`
+        h44.innerText = `Available slots: ${element.numOfSlots}`
+        h45.innerText = `deadline: ${element.deadline}`
+        h46.innerText = `Salary: ${element.salary}$`
+        btn5.innerText ="Apply Now!"
+
+        div2.appendChild(h40);
+        div2.appendChild(h41);
+        div2.appendChild(h42);
+        div2.appendChild(h43);
+        div2.appendChild(h44);
+        div2.appendChild(h45);
+        div2.appendChild(h46);
+        div2.appendChild(btn5);
+        div2.appendChild(successmessage);
+        div2.style.backgroundColor = "white"; 
+        div2.style.color = "purple"; 
+        div2.style.borderRadius = "2em"      
+        searchresults.appendChild(div2);
+        div2.style.padding = "1.5em"
+        btn5.style.borderRadius = "0.8em" 
+        btn5.style.backgroundColor = "blue"
+        btn5.style.color = "gold"
+        btn5.style.marginLeft = "4em"
+        btn5.style.padding = "0.5em"
+        btn5.style.fontSize = "1.5em"
+
+        // let btn5 = document.getElementById("btn5")
+        btn5.addEventListener('click',async () => {
+           
+          data = await fetch("http://localhost:4000/job-seeker/getUser", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: email
+                }),
+              })
+              a = await data.json()
+              console.log(`this is the user:`)
+              console.log(a);
+
+         data2 = await fetch("http://localhost:4000/job-seeker/apply",{
+          method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  email: email,
+                  jobID: element._id,
+                  status: element.benefits,
+                  company: element.company,
+                  title: element.title
+                }),
+              })
+
+              successmessage.innerText = "You have applied successfully."
+              successmessage.style.color = "green";
+              
+        
+
+         })  
+
+
+        })
+
+
+        
+      }
+            
+              
+            // searchresults.append
+            
+    )} }
+        
+        catch(err) {
+          console.log(err);
+        }
+        searchbtn.value = "OFF";
+       } else {
+        searchresults.display = 'none';
+        searchbtn.value = "ON";
+
+       }}
+      // function abdulme() 
+       searchbtn.addEventListener('click', searchalgorithm)
+       console.log("this is jobseeker id");
+              console.log(jobseekeriddd.id);
+       async function getjobsapplied() {
+       
+       }
+       
+      </script> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   </body>

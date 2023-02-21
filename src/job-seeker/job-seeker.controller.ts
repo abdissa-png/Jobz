@@ -11,6 +11,8 @@ export class JobSeekerController {
   async getId(@Body() query: { email: string }) {
     return this.JobSeekerService.findJS(query.email)
     }
+
+  @Public() 
   @Post('search')
   async search(@Body() query: {title: string}) {
       return this.JobSeekerService.search(query)
@@ -38,6 +40,7 @@ export class JobSeekerController {
     return this.JobSeekerService.createProfile(profile);
   }
 
+  @Public()
   @Patch('editProfile')
   async editProfile(@Body() profile: {
     name: string,
@@ -56,6 +59,8 @@ export class JobSeekerController {
     return this.JobSeekerService.editProfile(profile);
   }
 
+
+  @Public()
   @Post('apply')
   async apply(@Body() jobform: {
       email: string,
@@ -79,6 +84,12 @@ export class JobSeekerController {
     async deleteUser(@Body() inputreq: { email: string }) {
         return this.JobSeekerService.deleteUser(inputreq)
   } 
+
+  @Public()
+  @Post('getjobsappliedto')
+  async getjobsapplied(@Body() query: {userid: string}){
+      return this.JobSeekerService.getjobsappliedto(query);
+  }
   
   @Get("getComplaints")
   async handleComplaints() {

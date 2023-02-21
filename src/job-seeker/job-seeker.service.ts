@@ -17,6 +17,7 @@ export class JobSeekerService {
     @InjectModel('experience') private experience: Model<Experience>,
     @InjectModel('education') private education: Model<Education>,
     @InjectModel('complaint') private complaint: Model<Complaint>,
+    @InjectModel('JobsAppliedTo') private jobsappliedto: Model<JobsAppliedTo>,
   ) {}
 
   async search(query) {
@@ -24,6 +25,11 @@ export class JobSeekerService {
     let Jobs = await this.Job.find({ title: query.title });
     return Jobs
   }
+   async getjobsappliedto(query){
+    let jobsapplied = await this.jobsappliedto.find({jobSeekerId: query.userid});
+    return jobsapplied;
+
+   }
 
   async createProfile(profile) {
     const newUser = new this.JobSeeker({
