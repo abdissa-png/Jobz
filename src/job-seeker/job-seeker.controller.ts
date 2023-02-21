@@ -77,17 +77,18 @@ export class JobSeekerController {
   ) {
     return this.JobSeekerService.apply(jobform);
   }
-
+  @Public()  
   @Post('complain')
   async complain(@Body() complaintform: { email: string; complaint: string }) {
     this.JobSeekerService.complain(complaintform);
   }
-
+  @Public()
   @Delete('deleteUser')
   async deleteUser(@Body() inputreq: { email: string }) {
+    console.log(inputreq.email)
     return this.JobSeekerService.deleteUser(inputreq);
   }
-
+  @Public()
   @Get('getComplaints')
   async handleComplaints() {
     return this.JobSeekerService.getComplaints();
