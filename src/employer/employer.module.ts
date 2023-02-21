@@ -5,6 +5,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { JobSchema } from 'src/Model/job.model';
 import { JobsAppliedToSchema } from 'src/Model/jobsAppliedTo.model';
 import { JobSeekerSchema } from 'src/Model/jobSeeker.model';
+import { EmployerSchema } from 'src/Model/employer.model';
 
 @Module({
   imports: [
@@ -20,6 +21,10 @@ import { JobSeekerSchema } from 'src/Model/jobSeeker.model';
       {
         name: 'JobSeeker',
         schema: JobSeekerSchema,
+      },
+      {
+        name: 'Employer',
+        schema: EmployerSchema,
       },
     ]),
   ],

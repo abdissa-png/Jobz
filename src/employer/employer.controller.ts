@@ -7,6 +7,12 @@ export class EmployerController {
   constructor(private employerService: EmployerService) {}
 
   @Public()
+  @Post('getUser')
+  async getUser(@Body() query: { email: string }) {
+    return this.employerService.getUser(query);
+  }
+
+  @Public()
   @Post('postJobs') // create a job in the database
   async postJobs(
     @Body()
@@ -28,6 +34,22 @@ export class EmployerController {
   }
 
   @Public()
+  @Patch('editProfile')
+  async editProfile(
+    @Body()
+    query: {
+      oldEmail: string;
+      name: string;
+      email: string;
+      location: string;
+      webAddress: string;
+      description: string;
+    },
+  ) {
+    return this.employerService.editProfile(query);
+  }
+
+  @Public()
   @Post('viewDetails') // returns list of jobseekers that applied to one job
   async listApplicants(@Body() query: { title: string; company: string }) {
     return this.employerService.listApplicants(query);
@@ -41,7 +63,9 @@ export class EmployerController {
 
   @Public()
   @Patch('updateStatus')
-    async updateStatus (@Body() query: {jobSeekerEmail: string, jobId: string, jobStatus: string}){
-      return this.employerService.updateStatus(query)
+  async updateStatus(
+    @Body() query: { jobSeekerEmail: string; jobId: string; jobStatus: string },
+  ) {
+    return this.employerService.updateStatus(query);
   }
 }

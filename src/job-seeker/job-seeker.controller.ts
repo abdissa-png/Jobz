@@ -95,16 +95,13 @@ export class JobSeekerController {
 
   @Public()
   @Post('getEducation')
-  async getEducation(@Body() query: {email: string}){
-    return this.JobSeekerService.getEducation(query)
+  async getEducation(@Body() query: { email: string }) {
+    return this.JobSeekerService.getEducation(query);
   }
-
 
   @Public()
   @Post('getExperience')
-  async getExperience(@Body() query: {email: string}){
-    return this.JobSeekerService.getExperience(query)
+  async getExperience(@Body() query: { email: string }) {
+    return this.JobSeekerService.getExperience(query);
   }
-
 }
-

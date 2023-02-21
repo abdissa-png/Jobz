@@ -20,9 +20,9 @@ export class JobSeekerService {
   ) {}
 
   async search(query) {
-    console.log(query.keyWord)
+    console.log(query.keyWord);
     let Jobs = await this.Job.find({ title: query.title });
-    return Jobs
+    return Jobs;
   }
 
   async createProfile(profile) {
@@ -106,35 +106,35 @@ export class JobSeekerService {
   }
 
   async apply(jobform) {
-    let jid = await this.findJS(jobform.email) 
-    jid = jid.id
+    let jid = await this.findJS(jobform.email);
+    jid = jid.id;
     // find job id will be called here
     const newApplication = new this.JobsAppliedTo({
       jobId: jobform.jobID,
       jobSeekerId: jid,
       title: jobform.title,
       status: jobform.status,
-      company: jobform.company
+      company: jobform.company,
     });
-    console.log(newApplication)
+    console.log(newApplication);
     const result = await newApplication.save();
   }
 
   async complain(complaintform) {
-    const jid = await this.findJS(complaintform.email)
+    const jid = await this.findJS(complaintform.email);
     const newComplaint = new this.complaint({
       jobSeekerId: jid.id,
-      email: complaintform.email,   
-      complaint: complaintform.complaint
-    })
+      email: complaintform.email,
+      complaint: complaintform.complaint,
+    });
     const result = await newComplaint.save();
   }
 
   async getComplaints() {
     const complaints = await this.complaint.find().exec();
-    return complaints
+    return complaints;
   }
-  
+
   async deleteUser(inputreq) {
     const result = await this.JobSeeker.deleteOne({
       email: inputreq.email,
@@ -145,25 +145,32 @@ export class JobSeekerService {
     }
   }
 
-
-  async getEducation(query: { email: string; }) {
+  async getEducation(query: { email: string }) {
     let queryResult = await this.JobSeeker.find({
       email: query.email,
-    })
-    let person = await this.education.find({
-      jobSeekerId: queryResult[0].id
-    })
-    return person[0]
+    });
+    try {
+      let person = await this.education.find({
+        jobSeekerId: queryResult[0].id,
+      });
+      return person[0];
+    } catch {
+      return 'not found';
+    }
   }
 
-  async getExperience(query: { email: string; }) {
+  async getExperience(query: { email: string }) {
     let queryResult = await this.JobSeeker.find({
       email: query.email,
-    })
-    let person = await this.experience.find({
-      jobSeekerId: queryResult[0].id
-    })
-    return person[0]
+    });
+    try {
+      let person = await this.experience.find({
+        jobSeekerId: queryResult[0].id,
+      });
+      return person[0];
+    } catch {
+      return 'not found';
+    }
   }
 
   async findJS(email: string) {

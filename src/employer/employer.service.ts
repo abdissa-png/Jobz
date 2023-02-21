@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { Employer } from 'src/Model/employer.model';
 import { Job } from 'src/Model/job.model';
 import { JobsAppliedTo } from 'src/Model/jobsAppliedTo.model';
 import { JobSeeker } from 'src/Model/jobSeeker.model';
@@ -11,7 +12,16 @@ export class EmployerService {
     @InjectModel('Job') private job: Model<Job>,
     @InjectModel('JobsAppliedTo') private JobsAppliedTo: Model<JobsAppliedTo>,
     @InjectModel('JobSeeker') private JobSeeker: Model<JobSeeker>,
+    @InjectModel('Employer') private Employer: Model<Employer>,
   ) {}
+
+  async getUser(query) {
+    let result = await this.Employer.find({
+      email: query.email,
+    });
+    let real = result[0];
+    return real;
+  }
 
   async addJob(job) {
     const newJob = new this.job({
@@ -48,21 +58,36 @@ export class EmployerService {
     return realResult;
   }
 
-  async updateStatus(query){
+  async updateStatus(query) {
     let person = await this.JobSeeker.find({
-      email: query.jobSeekerEmail
-    })
-    let realPerson = person[0]
+      email: query.jobSeekerEmail,
+    });
+    let realPerson = person[0];
     let result = await this.JobsAppliedTo.find({
       jobId: query.jobId,
-      jobSeekerId: realPerson._id
-    })
-    result[0].status = "Accepted"
-    result[0].save()
-    return result
+      jobSeekerId: realPerson._id,
+    });
+    result[0].status = 'Accepted';
+    result[0].save();
+    return result;
   }
   async getAllJobs(company) {
     let result1 = this.job.find({ company: company.company });
     return result1;
+  }
+
+  async editProfile(query) {
+    let result = await this.Employer.find({
+      email: query.oldEmail,
+    });
+
+    let real = result[0];
+    real.name = query.name;
+    real.location = query.location;
+    real.email = query.email;
+    real.webAddress = query.webAddress;
+    real.description = query.description;
+    real.save();
+    return real;
   }
 }
