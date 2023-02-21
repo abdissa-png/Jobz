@@ -21,6 +21,8 @@ function btncorrect() {
 
 
 
+
+
 async function displayRadioValue() {
         
         gender = btncorrect();
@@ -57,8 +59,9 @@ async function displayRadioValue() {
             });
             result = await result.json();
             console.log(result.access_token);
-            localStorage.setItem("access_token",result.access_token);
-            console.log(`access_token: ${access_token}`);
+            localStorage.setItem("email",emailstr);
+            let emailfromlocal = localStorage.getItem("email");
+            console.log(`email: ${emailfromlocal}`);
             
           
             

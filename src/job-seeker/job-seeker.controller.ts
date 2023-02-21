@@ -42,6 +42,7 @@ export class JobSeekerController {
     return this.JobSeekerService.createProfile(profile);
   }
 
+  @Public()
   @Patch('editProfile')
   async editProfile(
     @Body()
