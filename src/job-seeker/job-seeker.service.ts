@@ -21,25 +21,25 @@ export class JobSeekerService {
   ) {}
 
   async search(query) {
-    console.log(query.keyWord);
     let Jobs = await this.Job.find({ title: query.title });
     return Jobs;
   }
-   async getjobsappliedto(query){
-    let jobsapplied = await this.jobsappliedto.find({jobSeekerId: query.userid});
+  async getjobsappliedto(query) {
+    let jobsapplied = await this.jobsappliedto.find({
+      jobSeekerId: query.userid,
+    });
     return jobsapplied;
-
-   }
+  }
 
   async createProfile(profile) {
-    const newUser = new this.JobSeeker({
+    const newUser = await this.JobSeeker.find({
       name: profile.name,
       email: profile.email,
       sex: profile.sex,
       skills: profile.skills,
       qualifications: profile.qualifications,
     });
-    const result = await newUser.save();
+    const result = await newUser[0];
     const newUSerexp = new this.experience({
       jobSeekerId: result._id,
       jobTitle: profile.jobTitle,
@@ -60,13 +60,13 @@ export class JobSeekerService {
       degreeLevel: profile.degreeLevel,
     });
     const result2 = await newUseredu.save();
-    return;
+    return result2;
   }
 
   async editProfile(profile) {
-    const userID = await this.findJS(profile.email);
-    const userExp = await this.findexp(profile.email);
-    const userEdu = await this.findedu(profile.email);
+    const userID = await this.findJS(profile.oldEmail);
+    const userExp = await this.findexp(profile.oldEmail);
+    const userEdu = await this.findedu(profile.oldEmail);
 
     if (userID) {
       if (profile.name) {
@@ -109,6 +109,7 @@ export class JobSeekerService {
       userEdu.save();
       userExp.save();
     }
+    return userID;
   }
 
   async apply(jobform) {
@@ -122,7 +123,6 @@ export class JobSeekerService {
       status: jobform.status,
       company: jobform.company,
     });
-    console.log(newApplication);
     const result = await newApplication.save();
   }
 
@@ -145,7 +145,6 @@ export class JobSeekerService {
     const result = await this.JobSeeker.deleteOne({
       email: inputreq.email,
     }).exec();
-    console.log(result);
     if (result.deletedCount === 0) {
       throw new NotFoundException('Could not find user');
     }
@@ -157,7 +156,7 @@ export class JobSeekerService {
     });
     try {
       let person = await this.education.find({
-        jobSeekerId: queryResult[0].id,
+        jobSeekerId: queryResult[0]._id,
       });
       return person[0];
     } catch {
@@ -171,7 +170,7 @@ export class JobSeekerService {
     });
     try {
       let person = await this.experience.find({
-        jobSeekerId: queryResult[0].id,
+        jobSeekerId: queryResult[0]._id,
       });
       return person[0];
     } catch {

@@ -72,7 +72,7 @@ export class EmployerService {
     return result;
   }
   async getAllJobs(company) {
-    let result1 = this.job.find({ company: company.company });
+    let result1 = await this.job.find({ company: company.company });
     return result1;
   }
 

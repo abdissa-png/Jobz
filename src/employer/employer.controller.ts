@@ -34,7 +34,7 @@ export class EmployerController {
   }
 
   @Public()
-  @Patch('editProfile')
+  @Post('editProfile')
   async editProfile(
     @Body()
     query: {

@@ -1,82 +1,90 @@
 const name = document.getElementById('name');
-    const email = document.getElementById('email');
-    const submitbtn = document.getElementById('submitSeekerSignUp');
-    const password = document.getElementById('pwd')
-    const skills = document.getElementById('Skills');
-    const qualifications = document.getElementById('qualifications');
-
+const email = document.getElementById('email');
+const submitbtn = document.getElementById('submitSeekerSignUp');
+const password = document.getElementById('pwd');
+const skills = document.getElementById('Skills');
+const qualifications = document.getElementById('qualifications');
+const institution = document.getElementById('institution')
+const fieldOfStudy = document.getElementById('field')
+const cgpa = document.getElementById('cgpa')
+const admissionYear = document.getElementById('admissionYear')
+const graduationYear = document.getElementById('graduationYear')
+const degree = document.getElementById('degree')
+const title = document.getElementById('job')
+const company = document.getElementById('company')
+const start = document.getElementById('start')
+const end = document.getElementById('end')
+const reference = document.getElementById('reference')
 
 function btncorrect() {
   var ele = document.getElementsByName('Sex');
-        for(i = 0; i < ele.length; i++) {
-            if(ele[i].checked){
-            const Sex = ele[i].value;
-            return Sex;
-
-            }
-        }
-
+  for (i = 0; i < ele.length; i++) {
+    if (ele[i].checked) {
+      const Sex = ele[i].value;
+      return Sex;
+    }
+  }
 }
 
+submitbtn.addEventListener('click', async () => {
+  gender = btncorrect();
+  const namestr = name.value;
+  const emailstr = email.value;
+  const skillsStr = skills.value;
+  const qualificationsStr = qualifications.value;
+  const passwordStr = password.value;
+  try {
+    if (namestr == '' || email == '')
+      throw 'please Fill the required information';
+    else {
+      result = await fetch('http://localhost:4000/auth/signup/jobSeeker', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: namestr,
+          email: emailstr,
+          sex: gender,
+          skills: skillsStr,
+          qualifications: qualificationsStr,
+          password: passwordStr,
+        }),
+      });
+      result = await result.json();
 
-
-
-
-
-async function displayRadioValue() {
-        
-        gender = btncorrect();
-        console.log(gender)
-        const namestr = name.value;
-        console.log(namestr)
-        const emailstr = email.value;
-        console.log(emailstr);
-        const skillsStr = skills.value;
-        console.log(skillsStr)
-        const qualificationsStr = qualifications.value;
-        console.log(qualificationsStr)
-        const passwordStr = password.value;
-        console.log(passwordStr)
-
-
-        try {
-          if(namestr == "" || email == ""  ) throw "please Fill the required information";
-
-          else {
-            result = await fetch("http://localhost:4000/auth/signup/jobSeeker", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                name:namestr,
-                email: emailstr,
-                sex: gender,
-                skills: skillsStr,
-                qualifications: qualificationsStr,
-                password: passwordStr
-              }),
-            });
-            result = await result.json();
-            console.log(result.access_token);
-            localStorage.setItem("email",emailstr);
-            let emailfromlocal = localStorage.getItem("email");
-            console.log(`email: ${emailfromlocal}`);
-            
-          
-            
-            window.open("jobSeeker/mainProfile.html", '_self');
-            
-          }
-
-        }
-        catch (err) {
-          console.log(err);
-        }
-      }
-
-submitbtn.addEventListener('click', displayRadioValue)
-// console.log(`my name is ${result.name}`);
+      another = fetch('http://localhost:4000/job-seeker/createProfile', {
+        method: 'Post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: namestr,
+          email: emailstr,
+          sex: gender,
+          skills: skillsStr,
+          qualifications: qualificationsStr,
+          institution: institution.value,
+          fieldOfStudy: fieldOfStudy.value,
+          gpa: cgpa.value,
+          admissionYear: admissionYear.value,
+          graduationYear: graduationYear.value,
+          degreeLevel: degree.value,
+          jobTitle: title.value,
+          companyName: company.value,
+          startDate: start.value,
+          endDate: end.value,
+          reference: reference.value
+        })
+      })
+      another = another[0].json()
+      localStorage.setItem('email', emailstr);
+      window.open('jobSeeker/mainProfile.html', '_self')
+    }
+  } catch (err) {
+    console.log(err);
+  }
+})
 
 
 let loginBtn = document.getElementById('login');

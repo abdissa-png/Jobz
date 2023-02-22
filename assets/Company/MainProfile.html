@@ -88,6 +88,9 @@
       .open-button:hover {
         opacity: 1;
       }
+      .show {
+        display: block;
+      }
     </style>
     <title>Employer Dashboard</title>
   </head>
@@ -181,7 +184,7 @@
                     </button>
 
                     <div class="form-popup" id="myForm">
-                      <form action="" class="form-container">
+                      <div class="form-container">
                         <h1>Edit Profile</h1>
 
                         <div class="container mt-3">
@@ -257,13 +260,15 @@
                         >
                           Close
                         </button>
-                      </form>
+                      </div>
                     </div>
 
                     <button id="postJobBtn" class="btn btn-warning m-1">
                       Post a Job
                     </button>
-                    <button class="btn btn-warning m-1">Logout</button>
+                    <button id="logout" class="btn btn-warning m-1">
+                      Logout
+                    </button>
                   </div>
                 </div>
               </div>
